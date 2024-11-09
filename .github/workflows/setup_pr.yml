@@ -1,13 +1,9 @@
 name: Setup PR for code review
-
 on:
   pull_request_target:
     types: [opened, reopened]
-
 permissions: write-all
-
 jobs:
-
   assign:
     runs-on: ubuntu-latest    
     steps:
@@ -30,7 +26,6 @@ jobs:
                 break
             fi      
         done
-
      - name: Checking your lab number
        run: |
         if [[ $LABEL == '' ]]; then
@@ -38,7 +33,6 @@ jobs:
             exit 1
         fi
         echo Your number was parsed correctly - ${{ env.LABEL }}
-
      - name: Checking your group number
        run: |
         if [[ $GROUP == '' ]]; then
@@ -74,4 +68,3 @@ jobs:
        with:
           reviewers: "kolyanch" 
           token: ${{ secrets.GITHUB_TOKEN }}
-          
