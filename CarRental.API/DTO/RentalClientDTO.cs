@@ -1,13 +1,9 @@
-﻿namespace CarRental.Domain;
+﻿namespace CarRental.API.DTO;
 
 /// <summary>
-/// Реализация клиента проката
+/// Клиент проката автомобилей
 /// </summary>
-/// <param name="id">Идентификатор клиента</param>
-/// <param name="passport">Паспорт клиента</param>
-/// <param name="fullName">ФИО клиента</param>
-/// <param name="birthDate">Дата рождения клиента</param>
-public class RentalClient(int id, string passport, string fullName, DateTime birthDate)
+public class RentalClientDTO(int id, string passport, string fullName, DateTime birthDate)
 {
     /// <summary>
     /// Идентификатор клиента

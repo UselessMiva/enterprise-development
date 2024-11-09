@@ -1,13 +1,9 @@
-﻿namespace CarRental.Domain;
+﻿namespace CarRental.API.DTO;
 
 /// <summary>
 /// Реализация автомобиля
 /// </summary>
-/// <param name="id">Идентификатор автомобиля</param>
-/// <param name="carNumber">Номер автомобиля</param>
-/// <param name="model">Модель автомобиля</param>
-/// <param name="color">Цвет автомобиля</param>
-public class Vehicle(int id, string carNumber, string model, string color)
+public class VehicleDTO(int id, string carNumber, string model, string color)
 {
     /// <summary>
     /// Идентификатор автомобиля

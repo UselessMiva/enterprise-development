@@ -1,12 +1,9 @@
-﻿namespace CarRental.Domain;
+﻿namespace CarRental.API.DTO;
 
 /// <summary>
 /// Реализация пункта проката
 /// </summary>
-/// <param name="id">Идентификатор пункта</param>
-/// <param name="name">Название пункта</param>
-/// <param name="address">Адрес пункта</param>
-public class RentalPoint(int id, string name, string address)
+public class RentalPointDTO(int id, string name, string address)
 {
     /// <summary>
     /// Идентификатор пункта проката
