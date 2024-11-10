@@ -5,4 +5,4 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CarRental.Domain.Repository;
 
-internal interface IRentalPointRepository : IRepository<RentalPoint>;
+public interface IRentalPointRepository : IRepository<RentalPoint, int>;

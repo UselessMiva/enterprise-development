@@ -5,6 +5,4 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CarRental.Domain.Repository;
 
-//internal interface IRentalClientRepository : IRepository<RentalClient>;
-//{
-//}
+public interface IRentalClientRepository : IRepository<RentalClient, int>;

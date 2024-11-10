@@ -5,42 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CarRental.Domain.Repository;
 
-//public class RentalPointRepository(RentalPoint context) : IRentalPointRepository
-//{
+public class RentalPointRepository() : IRentalPointRepository
+{
 
-//    /// <inheritdoc />
-//    public IEnumerable<RentalPoint> GetAll()
-//    {
-//        return context.RentalPoints;
-//    }
+    private static readonly List<RentalPoint> _rentalPoints = [];
+    /// <inheritdoc />
+    public List<RentalPoint> GetAll() => _rentalPoints;
 
-//    /// <inheritdoc />
-//    public RentalPoint? GetById(int id)
-//    {
-//        return context.RentalPoints.Find(id);
-//    }
 
-//    /// <inheritdoc />
-//    public RentalPoint Create(RentalPoint entity)
-//    {
-//        var res = context.RentalPoints.Add(entity).Entity;
-//        context.SaveChanges();
-//        return res;
-//    }
+    /// <inheritdoc />  
+    public RentalPoint? Get(int id) => _rentalPoints.Find(d => d.Id == id);
 
-//    /// <inheritdoc />
-//    public RentalPoint Update(RentalPoint entity)
-//    {
-//        var entry = context.Entry(entity);
-//        entry.State = EntityState.Modified;
-//        context.SaveChanges();
-//        return entry.Entity;
-//    }
+    /// <inheritdoc />
+    public void Post(RentalPoint newObj)
+    {
+        newObj.Id = _rentalPoints.Count;
+        _rentalPoints.Add(newObj);
+    }
 
-//    /// <inheritdoc />
-//    public void Delete(RentalPoint entity)
-//    {
-//        context.RentalPoints.Remove(entity);
-//        context.SaveChanges();
-//    }
-//}
+    /// <inheritdoc />
+    public bool Put(RentalPoint newObj, int id)
+    {
+        var oldRentalPoint = Get(id);
+        if (oldRentalPoint == null) return false;
+        oldRentalPoint.Id = newObj.Id;
+        oldRentalPoint.Address = newObj.Address;
+        oldRentalPoint.Name = newObj.Name;
+        return true;
+    }
+
+    /// <inheritdoc />
+    public bool Delete(int id)
+    {
+        var deletedRentalPoint = Get(id);
+        if (deletedRentalPoint == null) return false;
+        _rentalPoints.Remove(deletedRentalPoint);
+        return true;
+    }
+}

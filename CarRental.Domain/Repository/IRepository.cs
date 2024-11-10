@@ -8,30 +8,39 @@ namespace CarRental.Domain.Repository;
 /// <summary>
 /// Обобщенный интерфейс репозитория
 /// </summary>
-public interface IRepository<T>
+public interface IRepository<T, TKey>
 {
     /// <summary>
-    /// Получение всех сущностей
+    /// Вернуть все элементы
     /// </summary>
-    public IEnumerable<T> GetAll();
+    /// <returns></returns>
+    public List<T> GetAll();
 
     /// <summary>
-    /// Получение сущности по id
+    /// Вернуть элемент по идентификатору
     /// </summary>
-    public T? GetById(int id);
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public T? Get(TKey id);
 
     /// <summary>
-    /// Создание сущности
+    /// Удалить элемент по идентификатору
     /// </summary>
-    public T Create(T entity);
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public bool Delete(TKey id);
 
     /// <summary>
-    /// Изменение сущности
+    /// Добавить элемент
     /// </summary>
-    public T Update(T entity);
+    /// <param name="newObj"></param>
+    public void Post(T newObj);
 
     /// <summary>
-    /// Удаление сущности
+    /// Изменить элемент по идентификатору
     /// </summary>
-    public void Delete(T entity);
+    /// <param name="newObj"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public bool Put(T newObj, TKey id);
 }

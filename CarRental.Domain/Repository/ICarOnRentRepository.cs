@@ -5,4 +5,4 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CarRental.Domain.Repository;
 
-//    internal interface ICarOnRentRepository : IRepository<CarOnRent>;
+public interface ICarOnRentRepository : IRepository<CarOnRent, int>;
