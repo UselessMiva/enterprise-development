@@ -1,6 +1,5 @@
-﻿namespace CarRental.API.Services
+﻿namespace CarRental.API.Services;
+
+public class RentalClientService
 {
-    public class RentalClientService
-    {
-    }
 }
