@@ -13,7 +13,7 @@ public interface IService<Dto, T>
     /// </summary>
     /// <param name="id">Идентификатор сущности</param>
     /// <returns>Сущность с выбранным идентификатором</returns>
-    public T? GetById(int id);
+    public T? Get(int id);
 
     /// <summary>
     /// Добавление сущности

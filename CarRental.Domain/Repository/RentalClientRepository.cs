@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CarRental.Domain.Repository;
 
-public class RentalClientRepository() : IRentalClientRepository
+public class RentalClientRepository() : IRepository<RentalClient>
 {
     private static readonly List<RentalClient> _rentalclients = [];
-    /// <inheritdoc />
+    /// 
     public List<RentalClient> GetAll() =>  _rentalclients;
 
 
-    /// <inheritdoc />  
+    ///   
     public RentalClient? Get(int id) =>  _rentalclients.Find(d => d.Id == id);
 
-    /// <inheritdoc />
-    public void Post(RentalClient newObj)
+    /// 
+    public RentalClient Post(RentalClient newObj)
     {
-        newObj.Id =  _rentalclients.Count;
          _rentalclients.Add(newObj);
+        return newObj;
     }
 
-    /// <inheritdoc />
+    /// 
     public bool Put(RentalClient newObj, int id)
     {
         var oldRentalClient = Get(id);
@@ -33,7 +33,7 @@ public class RentalClientRepository() : IRentalClientRepository
         return true;
     }
 
-    /// <inheritdoc />
+    /// 
     public bool Delete(int id)
     {
         var deletedRentalClient = Get(id);

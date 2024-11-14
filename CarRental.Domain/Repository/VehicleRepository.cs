@@ -1,28 +1,34 @@
 ﻿using System.Numerics;
 
 namespace CarRental.Domain.Repository;
-
-/// <summary>
-/// Класс реализует интерфейс <see cref="IVehicleRepository" />
-/// </summary>
-public class VehicleRepository() : IVehicleRepository
+public class VehicleRepository() : IRepository<Vehicle>
 {
     private static readonly List<Vehicle> _vehicles = [];
-    /// <inheritdoc />
+    /// 
     public List<Vehicle> GetAll() => _vehicles;
 
 
-    /// <inheritdoc />  
+    ///  
     public Vehicle? Get(int id) => _vehicles.Find(d => d.Id == id);
 
-    /// <inheritdoc />
-    public void Post(Vehicle newObj)
+    /// 
+    public Vehicle? Post(Vehicle newObj)
     {
-        newObj.Id = _vehicles.Count;
         _vehicles.Add(newObj);
+        return newObj;
     }
 
-    /// <inheritdoc />
+  
+
+    /// 
+    public bool Delete(int id)
+    {
+        var deletedVehicle = Get(id);
+        if (deletedVehicle == null) return false;
+        _vehicles.Remove(deletedVehicle);
+        return true;
+    }
+
     public bool Put(Vehicle newObj, int id)
     {
         var oldVehicle = Get(id);
@@ -33,15 +39,4 @@ public class VehicleRepository() : IVehicleRepository
         oldVehicle.Color = newObj.Color;
         return true;
     }
-
-    /// <inheritdoc />
-    public bool Delete(int id)
-    {
-        var deletedVehicle = Get(id);
-        if (deletedVehicle == null) return false;
-        _vehicles.Remove(deletedVehicle);
-        return true;
-    }
-
-    
 }

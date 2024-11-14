@@ -8,7 +8,7 @@ namespace CarRental.Domain.Repository;
 /// <summary>
 /// Обобщенный интерфейс репозитория
 /// </summary>
-public interface IRepository<T, TKey>
+public interface IRepository<T>
 {
     /// <summary>
     /// Вернуть все элементы
@@ -21,20 +21,20 @@ public interface IRepository<T, TKey>
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public T? Get(TKey id);
+    public T? Get(int id);
 
     /// <summary>
     /// Удалить элемент по идентификатору
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public bool Delete(TKey id);
+    public bool Delete(int id);
 
     /// <summary>
     /// Добавить элемент
     /// </summary>
     /// <param name="newObj"></param>
-    public void Post(T newObj);
+    public T? Post(T newObj);
 
     /// <summary>
     /// Изменить элемент по идентификатору
@@ -42,5 +42,5 @@ public interface IRepository<T, TKey>
     /// <param name="newObj"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public bool Put(T newObj, TKey id);
+    public bool Put(T newObj, int id);
 }
