@@ -12,7 +12,6 @@ public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper map
 {
     private int _id = 1;
 
-
     /// <summary>
     /// Получает список всех автомобилей
     /// </summary>

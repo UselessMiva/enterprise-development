@@ -7,23 +7,18 @@ namespace CarRental.Domain.Repository;
 
 public class RentalPointRepository() : IRepository<RentalPoint>
 {
-
     private static readonly List<RentalPoint> _rentalPoints = [];
-    /// 
+    
     public List<RentalPoint> GetAll() => _rentalPoints;
-
-
-    ///   
+  
     public RentalPoint? Get(int id) => _rentalPoints.Find(d => d.Id == id);
-
-    /// 
+    
     public RentalPoint Post(RentalPoint newObj)
     {
         _rentalPoints.Add(newObj);
         return newObj;
     }
 
-    /// 
     public bool Put(RentalPoint newObj, int id)
     {
         var oldRentalPoint = Get(id);
@@ -34,7 +29,6 @@ public class RentalPointRepository() : IRepository<RentalPoint>
         return true;
     }
 
-    /// 
     public bool Delete(int id)
     {
         var deletedRentalPoint = Get(id);

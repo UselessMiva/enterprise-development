@@ -8,21 +8,17 @@ namespace CarRental.Domain.Repository;
 public class RentalClientRepository() : IRepository<RentalClient>
 {
     private static readonly List<RentalClient> _rentalclients = [];
-    /// 
+    
     public List<RentalClient> GetAll() =>  _rentalclients;
-
-
-    ///   
+ 
     public RentalClient? Get(int id) =>  _rentalclients.Find(d => d.Id == id);
-
-    /// 
+   
     public RentalClient Post(RentalClient newObj)
     {
          _rentalclients.Add(newObj);
         return newObj;
     }
 
-    /// 
     public bool Put(RentalClient newObj, int id)
     {
         var oldRentalClient = Get(id);
@@ -33,7 +29,6 @@ public class RentalClientRepository() : IRepository<RentalClient>
         return true;
     }
 
-    /// 
     public bool Delete(int id)
     {
         var deletedRentalClient = Get(id);

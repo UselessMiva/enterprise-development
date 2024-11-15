@@ -12,7 +12,6 @@ public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, 
 {
     private int _id = 1;
 
-
     /// <summary>
     /// Получает список всех пунктов проката
     /// </summary>

@@ -12,7 +12,6 @@ public class RentalClientService(IRepository<RentalClient> rentalClientRepositor
 {
     private int _id = 1;
 
-
     /// <summary>
     /// Получает список всех клиентов
     /// </summary>

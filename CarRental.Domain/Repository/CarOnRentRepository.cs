@@ -8,21 +8,16 @@ namespace CarRental.Domain.Repository;
 public class CarOnRentRepository() : IRepository<CarOnRent>
 {
     private static readonly List<CarOnRent> _carsOnRent = [];
-    /// 
     public List<CarOnRent> GetAll() => _carsOnRent;
 
-
-    /// 
     public CarOnRent? Get(int id) => _carsOnRent.Find(d => d.Id == id);
 
-    /// 
     public CarOnRent? Post(CarOnRent newObj)
     {
         _carsOnRent.Add(newObj);
         return newObj;
     }
 
-    /// 
     public bool Put(CarOnRent newObj, int id)
     {
         var oldCarOnRent = Get(id);
@@ -38,7 +33,6 @@ public class CarOnRentRepository() : IRepository<CarOnRent>
         return true;
     }
 
-    /// 
     public bool Delete(int id)
     {
         var deletedCarOnRent = Get(id);

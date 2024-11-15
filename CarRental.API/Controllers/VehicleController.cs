@@ -2,13 +2,14 @@
 using CarRental.Domain;
 using System.Collections.Generic;
 using System.Linq;
+using CarRental.API.Services;
+using CarRental.API.DTO;
 namespace CarRental.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class VehiclesController : ControllerBase
+public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : ControllerBase
 {
-    private static List<Vehicle> vehicles = new List<Vehicle>();
 
     /// <summary>
     /// Получить все автомобили
@@ -17,7 +18,7 @@ public class VehiclesController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Vehicle>> GetAll()
     {
-        return Ok(vehicles);
+        return Ok(vehicleService.GetAll());
     }
 
     /// <summary>
@@ -26,14 +27,13 @@ public class VehiclesController : ControllerBase
     /// <param name="id">Идентификатор автомобиля</param>
     /// <returns>Автомобиль</returns>
     [HttpGet("{id}")]
-    public ActionResult<Vehicle> GetById(int id)
+    public ActionResult<Vehicle> Get(int id)
     {
-        var vehicle = vehicles.FirstOrDefault(v => v.Id == id);
-        if (vehicle == null)
-        {
+        var result = vehicleService.Get(id);
+        if (result == null)
             return NotFound();
-        }
-        return Ok(vehicle);
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -42,11 +42,13 @@ public class VehiclesController : ControllerBase
     /// <param name="vehicle">Данные автомобиля</param>
     /// <returns>Созданный автомобиль</returns>
     [HttpPost]
-    public ActionResult<Vehicle> Create(Vehicle vehicle)
+    public ActionResult<Vehicle> Post([FromBody] VehicleDTO vehicle)
     {
-        vehicle.Id = vehicles.Count > 0 ? vehicles.Max(v => v.Id) + 1 : 1;
-        vehicles.Add(vehicle);
-        return CreatedAtAction(nameof(GetById), new { id = vehicle.Id }, vehicle);
+        var result = vehicleService.Post(vehicle);
+        if (result == null)
+            return BadRequest();
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -56,19 +58,13 @@ public class VehiclesController : ControllerBase
     /// <param name="vehicle">Обновленные данные автомобиля</param>
     /// <returns>Статус ответа</returns>
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Vehicle vehicle)
+    public IActionResult Put(int id, [FromBody] VehicleDTO vehicle)
     {
-        var existingVehicle = vehicles.FirstOrDefault(v => v.Id == id);
-        if (existingVehicle == null)
-        {
-            return NotFound();
-        }
+        var result = vehicleService.Put(id, vehicle);
+        if (!result)
+            return BadRequest();
 
-        existingVehicle.CarNumber = vehicle.CarNumber;
-        existingVehicle.Model = vehicle.Model;
-        existingVehicle.Color = vehicle.Color;
-
-        return NoContent();
+        return Ok();
     }
 
     /// <summary>
@@ -79,13 +75,10 @@ public class VehiclesController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var vehicle = vehicles.FirstOrDefault(v => v.Id == id);
-        if (vehicle == null)
-        {
+        var result = vehicleService.Delete(id);
+        if (!result)
             return NotFound();
-        }
 
-        vehicles.Remove(vehicle);
-        return NoContent();
+        return Ok();
     }
 }

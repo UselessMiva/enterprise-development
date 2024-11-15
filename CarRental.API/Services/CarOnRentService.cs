@@ -12,7 +12,6 @@ public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMappe
 {
     private int _id = 1;
 
-
     /// <summary>
     /// Получает список всех автомобилей, выданных в аренду
     /// </summary>

@@ -1,12 +1,13 @@
-﻿using CarRental.Domain;
+﻿using CarRental.API.DTO;
+using CarRental.API.Services;
+using CarRental.Domain;
 using Microsoft.AspNetCore.Mvc;
 namespace CarRental.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RentalClientsController : ControllerBase
+public class RentalClientsController(IService<RentalClientDTO, RentalClient> rentalClientService) : ControllerBase
 {
-    private static List<RentalClient> rentalClients = new List<RentalClient>();
 
     /// <summary>
     /// Получить всех клиентов проката
@@ -15,7 +16,7 @@ public class RentalClientsController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<RentalClient>> GetAll()
     {
-        return Ok(rentalClients);
+        return Ok(rentalClientService.GetAll());
     }
 
     /// <summary>
@@ -24,14 +25,13 @@ public class RentalClientsController : ControllerBase
     /// <param name="id">Идентификатор клиента</param>
     /// <returns>Клиент проката</returns>
     [HttpGet("{id}")]
-    public ActionResult<RentalClient> GetById(int id)
+    public ActionResult<RentalClient> Get(int id)
     {
-        var rentalClient = rentalClients.FirstOrDefault(c => c.Id == id);
-        if (rentalClient == null)
-        {
+        var result = rentalClientService.Get(id);
+        if (result == null)
             return NotFound();
-        }
-        return Ok(rentalClient);
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -40,11 +40,13 @@ public class RentalClientsController : ControllerBase
     /// <param name="rentalClient">Данные клиента проката</param>
     /// <returns>Созданный клиент проката</returns>
     [HttpPost]
-    public ActionResult<RentalClient> Create(RentalClient rentalClient)
+    public ActionResult<RentalClient> Post([FromBody] RentalClientDTO rentalClient)
     {
-        rentalClient.Id = rentalClients.Count > 0 ? rentalClients.Max(c => c.Id) + 1 : 1; // Генерация уникального ID
-        rentalClients.Add(rentalClient);
-        return CreatedAtAction(nameof(GetById), new { id = rentalClient.Id }, rentalClient);
+        var result = rentalClientService.Post(rentalClient);
+        if (result == null)
+            return BadRequest();
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -54,17 +56,13 @@ public class RentalClientsController : ControllerBase
     /// <param name="rentalClient">Обновленные данные клиента проката</param>
     /// <returns>Статус ответа</returns>
     [HttpPut("{id}")]
-    public IActionResult Update(int id, RentalClient rentalClient)
+    public IActionResult Put(int id,[FromBody] RentalClientDTO rentalClient)
     {
-        var existingRentalClient = rentalClients.FirstOrDefault(c => c.Id == id);
-        if (existingRentalClient == null)
-        {
-            return NotFound();
-        }
-        existingRentalClient.Passport = rentalClient.Passport;
-        existingRentalClient.FullName = rentalClient.FullName;
-        existingRentalClient.BirthDate = rentalClient.BirthDate;
-        return NoContent();
+        var result = rentalClientService.Put(id, rentalClient);
+        if (!result)
+            return BadRequest();
+
+        return Ok();
     }
 
     /// <summary>
@@ -75,12 +73,10 @@ public class RentalClientsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var rentalClient = rentalClients.FirstOrDefault(c => c.Id == id);
-        if (rentalClient == null)
-        {
+        var result = rentalClientService.Delete(id);
+        if (!result)
             return NotFound();
-        }
-        rentalClients.Remove(rentalClient);
-        return NoContent();
+
+        return Ok();
     }
 }
