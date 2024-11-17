@@ -1,20 +1,42 @@
 ﻿using System.Numerics;
-
 namespace CarRental.Domain.Repository;
+
+/// <summary>
+/// Репозиторий для управления транспортными средствами
+/// </summary>
 public class VehicleRepository() : IRepository<Vehicle>
 {
     private static readonly List<Vehicle> _vehicles = [];
-    
+
+    /// <summary>
+    /// Получает список всех транспортных средств
+    /// </summary>
+    /// <returns>Список всех транспортных средств</returns>
     public List<Vehicle> GetAll() => _vehicles;
-    
+
+    /// <summary>
+    /// Находит транспортное средство по заданному идентификатору
+    /// </summary>
+    /// <param name="id">Идентификатор транспортного средства</param>
+    /// <returnsАвтомобиль, если найден; иначе null</returns>
     public Vehicle? Get(int id) => _vehicles.Find(d => d.Id == id);
-    
+
+    /// <summary>
+    /// Добавляет новое транспортное средство в репозиторий
+    /// </summary>
+    /// <param name="newObj">Новое транспортное средство для добавления</param>
+    /// <returns>Добавленный автомобиль</returns>
     public Vehicle? Post(Vehicle newObj)
     {
         _vehicles.Add(newObj);
         return newObj;
     }
-  
+
+    /// <summary>
+    /// Удаляет транспортное средство по заданному идентификатору
+    /// </summary>
+    /// <param name="id">Идентификатор транспортного средства для удалени.</param>
+    /// <returns>true, если удаление прошло успешно; иначе false</returns>
     public bool Delete(int id)
     {
         var deletedVehicle = Get(id);
@@ -23,6 +45,12 @@ public class VehicleRepository() : IRepository<Vehicle>
         return true;
     }
 
+    /// <summary>
+    /// Обновляет информацию о транспортном средстве по заданному идентификатору
+    /// </summary>
+    /// <param name="newObj">Автомобиль с новыми данными</param>
+    /// <param name="id">Идентификатор транспортного средства для обновления</param>
+    /// <returns>true, если обновление прошло успешно; иначе false</returns>
     public bool Put(Vehicle newObj, int id)
     {
         var oldVehicle = Get(id);
