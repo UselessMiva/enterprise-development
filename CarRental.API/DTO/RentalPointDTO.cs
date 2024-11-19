@@ -3,20 +3,20 @@
 /// <summary>
 /// Реализация пункта проката
 /// </summary>
-public class RentalPointDTO(int id, string name, string address)
+public class RentalPointDTO
 {
     /// <summary>
     /// Идентификатор пункта проката
     /// </summary>
-    public int? Id { get; set; } = id;
+    public int? Id { get; set; }
 
     /// <summary>
     /// Название пункта проката
     /// </summary>
-    public string? Name { get; set; } = name;
+    public string? Name { get; set; }
 
     /// <summary>
     /// Адрес пункта проката
     /// </summary>
-    public string? Address { get; set; } = address;
+    public string? Address { get; set; }
 }

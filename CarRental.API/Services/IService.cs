@@ -1,5 +1,10 @@
 ﻿namespace CarRental.API.Services;
 
+/// <summary>
+/// Интерфейс для сервисов сущностей
+/// </summary>
+/// <typeparam name="Dto">Тип сущности Dto</typeparam>
+/// <typeparam name="T">Тип сущности</typeparam>
 public interface IService<Dto, T>
 {
     /// <summary>

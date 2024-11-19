@@ -6,6 +6,10 @@ using CarRental.API.Services;
 using CarRental.API.DTO;
 namespace CarRental.Api.Controllers;
 
+/// <summary>
+/// Контроллер для работы с автомобилями
+/// </summary>
+/// <param name="vehicleService">Сервис для работы с автомобилями</param>
 [ApiController]
 [Route("api/[controller]")]
 public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : ControllerBase
@@ -16,7 +20,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// </summary>
     /// <returns>Список автомобилей</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<Vehicle>> GetAll()
+    public ActionResult<IEnumerable<VehicleDTO>> GetAll()
     {
         return Ok(vehicleService.GetAll());
     }
@@ -27,7 +31,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// <param name="id">Идентификатор автомобиля</param>
     /// <returns>Автомобиль</returns>
     [HttpGet("{id}")]
-    public ActionResult<Vehicle> Get(int id)
+    public ActionResult<VehicleDTO> Get(int id)
     {
         var result = vehicleService.Get(id);
         if (result == null)
@@ -42,7 +46,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// <param name="vehicle">Данные автомобиля</param>
     /// <returns>Созданный автомобиль</returns>
     [HttpPost]
-    public ActionResult<Vehicle> Post([FromBody] VehicleDTO vehicle)
+    public ActionResult<VehicleDTO> Post([FromBody] VehicleDTO vehicle)
     {
         var result = vehicleService.Post(vehicle);
         if (result == null)

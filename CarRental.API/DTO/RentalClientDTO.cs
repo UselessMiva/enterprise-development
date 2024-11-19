@@ -3,25 +3,25 @@
 /// <summary>
 /// Клиент проката автомобилей
 /// </summary>
-public class RentalClientDTO(int id, string passport, string fullName, DateTime birthDate)
+public class RentalClientDTO
 {
     /// <summary>
     /// Идентификатор клиента
     /// </summary>
-    public int? Id { get; set; } = id;
+    public int? Id { get; set; }
 
     /// <summary>
     /// Паспорт клиента
     /// </summary>
-    public string? Passport { get; set; } = passport;
+    public string? Passport { get; set; }
 
     /// <summary>
     /// ФИО клиента
     /// </summary>
-    public string? FullName { get; set; } = fullName;
+    public string? FullName { get; set; }
 
     /// <summary>
     /// Дата рождения клиента
     /// </summary>
-    public DateTime? BirthDate { get; set; } = birthDate;
+    public DateTime? BirthDate { get; set; }
 }

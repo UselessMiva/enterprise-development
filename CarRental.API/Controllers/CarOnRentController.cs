@@ -4,6 +4,10 @@ using CarRental.Domain;
 using Microsoft.AspNetCore.Mvc;
 namespace CarRental.Api.Controllers;
 
+/// <summary>
+/// Контроллер для управления автомобилями в аренде
+/// </summary>
+/// <param name="carOnRentService">Сервис для работы с автомобилями в аренде</param>
 [ApiController]
 [Route("api/[controller]")]
 public class CarOnRentController(IService<CarOnRentDTO, CarOnRent> carOnRentService) : ControllerBase
@@ -14,7 +18,7 @@ public class CarOnRentController(IService<CarOnRentDTO, CarOnRent> carOnRentServ
     /// </summary>
     /// <returns>Список аренд автомобилей</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<CarOnRent>> GetAll()
+    public ActionResult<IEnumerable<CarOnRentDTO>> GetAll()
     {
         return Ok(carOnRentService.GetAll());
     }
@@ -25,7 +29,7 @@ public class CarOnRentController(IService<CarOnRentDTO, CarOnRent> carOnRentServ
     /// <param name="id">Идентификатор аренды</param>
     /// <returns>Аренда автомобиля</returns>
     [HttpGet("{id}")]
-    public ActionResult<CarOnRent> Get(int id)
+    public ActionResult<CarOnRentDTO> Get(int id)
     {
         var result = carOnRentService.Get(id);
         if (result == null)
@@ -40,7 +44,7 @@ public class CarOnRentController(IService<CarOnRentDTO, CarOnRent> carOnRentServ
     /// <param name="carOnRent">Данные аренды автомобиля</param>
     /// <returns>Созданная аренда автомобиля</returns>
     [HttpPost]
-    public ActionResult<CarOnRent> Create([FromBody] CarOnRentDTO carOnRent)
+    public ActionResult<CarOnRentDTO> Create([FromBody] CarOnRentDTO carOnRent)
     {
         var result = carOnRentService.Post(carOnRent);
         if (result == null)

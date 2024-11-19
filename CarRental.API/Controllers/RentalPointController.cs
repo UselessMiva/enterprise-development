@@ -4,6 +4,10 @@ using CarRental.Domain;
 using Microsoft.AspNetCore.Mvc;
 namespace CarRental.Api.Controllers;
 
+/// <summary>
+/// Контроллер для управления точками проката
+/// </summary>
+/// <param name="rentalPointService">Сервис для работы с точками проката</param>
 [ApiController]
 [Route("api/[controller]")]
 public class RentalPointsController(IService<RentalPointDTO, RentalPoint> rentalPointService) : ControllerBase
@@ -14,7 +18,7 @@ public class RentalPointsController(IService<RentalPointDTO, RentalPoint> rental
     /// </summary>
     /// <returns>Список пунктов проката</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<RentalPoint>> GetAll()
+    public ActionResult<IEnumerable<RentalPointDTO>> GetAll()
     {
         return Ok(rentalPointService.GetAll());
     }
@@ -25,7 +29,7 @@ public class RentalPointsController(IService<RentalPointDTO, RentalPoint> rental
     /// <param name="id">Идентификатор пункта проката</param>
     /// <returns>Пункт проката</returns>
     [HttpGet("{id}")]
-    public ActionResult<RentalPoint> Get(int id)
+    public ActionResult<RentalPointDTO> Get(int id)
     {
         var result = rentalPointService.Get(id);
         if (result == null)
@@ -40,7 +44,7 @@ public class RentalPointsController(IService<RentalPointDTO, RentalPoint> rental
     /// <param name="rentalPoint">Данные пункта проката</param>
     /// <returns>Созданный пункт проката</returns>
     [HttpPost]
-    public ActionResult<RentalPoint> Post([FromBody] RentalPointDTO rentalPoint)
+    public ActionResult<RentalPointDTO> Post([FromBody] RentalPointDTO rentalPoint)
     {
         var result = rentalPointService.Post(rentalPoint);
         if (result == null)

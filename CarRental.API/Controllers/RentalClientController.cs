@@ -4,6 +4,10 @@ using CarRental.Domain;
 using Microsoft.AspNetCore.Mvc;
 namespace CarRental.Api.Controllers;
 
+/// <summary>
+/// Контроллер для управления клиентами
+/// </summary>
+/// <param name="rentalClientService">Сервис для работы с клиентами</param>
 [ApiController]
 [Route("api/[controller]")]
 public class RentalClientsController(IService<RentalClientDTO, RentalClient> rentalClientService) : ControllerBase
@@ -14,7 +18,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// </summary>
     /// <returns>Список клиентов проката</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<RentalClient>> GetAll()
+    public ActionResult<IEnumerable<RentalClientDTO>> GetAll()
     {
         return Ok(rentalClientService.GetAll());
     }
@@ -25,7 +29,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// <param name="id">Идентификатор клиента</param>
     /// <returns>Клиент проката</returns>
     [HttpGet("{id}")]
-    public ActionResult<RentalClient> Get(int id)
+    public ActionResult<RentalClientDTO> Get(int id)
     {
         var result = rentalClientService.Get(id);
         if (result == null)
@@ -40,7 +44,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// <param name="rentalClient">Данные клиента проката</param>
     /// <returns>Созданный клиент проката</returns>
     [HttpPost]
-    public ActionResult<RentalClient> Post([FromBody] RentalClientDTO rentalClient)
+    public ActionResult<RentalClientDTO> Post([FromBody] RentalClientDTO rentalClient)
     {
         var result = rentalClientService.Post(rentalClient);
         if (result == null)

@@ -3,25 +3,25 @@
 /// <summary>
 /// Реализация автомобиля
 /// </summary>
-public class VehicleDTO(int id, string carNumber, string model, string color)
+public class VehicleDTO
 {
     /// <summary>
     /// Идентификатор автомобиля
     /// </summary>
-    public int? Id { get; set; } = id;
+    public int? Id { get; set; }
 
     /// <summary>
     /// Номер автомобиля
     /// </summary>
-    public string? CarNumber { get; set; } = carNumber;
+    public string? CarNumber { get; set; }
 
     /// <summary>
     /// Модель автомобиля
     /// </summary>
-    public string? Model { get; set; } = model;
+    public string? Model { get; set; }
 
     /// <summary>
     /// Цвет автомобиля
     /// </summary>
-    public string? Color { get; set; } = color;
+    public string? Color { get; set; }
 }
