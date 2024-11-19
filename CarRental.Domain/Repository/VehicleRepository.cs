@@ -1,12 +1,13 @@
 ﻿using System.Numerics;
+using CarRental.Domain;
 namespace CarRental.Domain.Repository;
 
 /// <summary>
 /// Репозиторий для управления транспортными средствами
 /// </summary>
-public class VehicleRepository() : IRepository<Vehicle>
+public class VehicleRepository(TestDataProvider dataProvider): IRepository<Vehicle>
 {
-    private static readonly List<Vehicle> _vehicles = [];
+    private readonly List<Vehicle> _vehicles = new List<Vehicle>(dataProvider.vehicles);
 
     /// <summary>
     /// Получает список всех транспортных средств

@@ -10,7 +10,7 @@ namespace CarRental.API.Controllers;
 /// <param name="requestService">Сервис для запросов</param>
 [Route("api/[controller]")]
 [ApiController]
-public class RequestController(RequestService requestService) : ControllerBase
+public class RequestController(IRequestService requestService) : ControllerBase
 {
     /// <summary>
     /// Возвращает список всех автомобилей

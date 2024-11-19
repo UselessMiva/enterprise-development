@@ -8,9 +8,9 @@ namespace CarRental.Domain.Repository;
 /// <summary>
 /// Репозиторий для управления пунктами аренды
 /// </summary>
-public class RentalPointRepository() : IRepository<RentalPoint>
+public class RentalPointRepository(TestDataProvider dataProvider) : IRepository<RentalPoint>
 {
-    private static readonly List<RentalPoint> _rentalPoints = [];
+    private readonly List<RentalPoint> _rentalPoints = new List<RentalPoint>(dataProvider.rentalPoints);
 
     /// <summary>
     /// Получает список всех пунктов аренды

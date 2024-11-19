@@ -8,9 +8,9 @@ namespace CarRental.Domain.Repository;
 /// <summary>
 /// Репозиторий для управления автомобилями в аренде
 /// </summary>
-public class CarOnRentRepository() : IRepository<CarOnRent>
+public class CarOnRentRepository(TestDataProvider dataProvider) : IRepository<CarOnRent>
 {
-    private static readonly List<CarOnRent> _carsOnRent = [];
+    private readonly List<CarOnRent> _carsOnRent = new List<CarOnRent>(dataProvider.vehiclesOnRent);
 
     /// <summary>
     /// Возвращает список всех автомобилей в аренде

@@ -26,8 +26,9 @@ builder.Services.AddSingleton<IRepository<Vehicle>, VehicleRepository>();
 builder.Services.AddSingleton<IService<CarOnRentDTO, CarOnRent>, CarOnRentService>();
 builder.Services.AddSingleton<IService<RentalClientDTO, RentalClient>, RentalClientService>();
 builder.Services.AddSingleton<IService<RentalPointDTO, RentalPoint>, RentalPointService>();
-builder.Services.AddSingleton<RequestService>();
 builder.Services.AddSingleton<IService<VehicleDTO, Vehicle>, VehicleService>();
+builder.Services.AddSingleton<IRequestService, RequestService>();
+builder.Services.AddSingleton<TestDataProvider>();
 
 builder.Services.AddAutoMapper(typeof(Mapping));
 

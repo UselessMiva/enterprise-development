@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace CarRental.API.Services;
 
 
-public class RequestService(
-    IRepository<Vehicle> vehicleRepository, IRepository<CarOnRent> carOnRentRepository)
+/// <summary>
+/// Сервис для работы с запросами
+/// </summary>
+public class RequestService(IRepository<Vehicle> vehicleRepository, IRepository<CarOnRent> carOnRentRepository) : IRequestService
 {
     /// <summary>
     /// Информация обо всех автомобилях
