@@ -3,4 +3,4 @@
 /// <summary>
 /// Реализация запросов
 /// </summary>
-public record RentalCounterDto(string? Model, int Count);
+public record RentalCounterDTO(string? Model, int Count);

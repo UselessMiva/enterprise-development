@@ -30,7 +30,7 @@ public interface IRequestService
     /// <summary>
     /// Информация о количестве аренд для каждого автомобиля
     /// </summary>
-     public List<RentalCounterDto> NumberOfRentForEachVehicle();
+     public List<RentalCounter> NumberOfRentForEachVehicle();
 
     /// <summary>
     /// Информация о пунктах проката по количеству аренд

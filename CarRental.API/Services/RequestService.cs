@@ -64,13 +64,12 @@ public class RequestService(IRepository<Vehicle> vehicleRepository, IRepository<
     /// <summary>
     /// Информация о количестве аренд для каждого автомобиля
     /// </summary>
-    public List<RentalCounterDto> NumberOfRentForEachVehicle()
-    {
-        var vehicleRentalCounts = carOnRentRepository.GetAll()
+    public List<RentalCounter> NumberOfRentForEachVehicle() 
+    { var vehicleRentalCounts = carOnRentRepository.GetAll()
             .GroupBy(r => r.Vehicle)
-            .Select(g => new RentalCounterDto(g.Key?.Model, g.Count()))
+            .Select(g => new RentalCounter(g.Key?.Model, g.Count()))
             .ToList();
-        return vehicleRentalCounts;
+      return vehicleRentalCounts; 
     }
 
     /// <summary>
