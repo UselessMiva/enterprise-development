@@ -61,7 +61,7 @@ public class RequestController(IRequestService requestService) : ControllerBase
     /// </summary>
     /// <returns>Список  количества аренд для каждой модели автомобиля</returns>
     [HttpGet("numberOfCarRentals")]
-    public ActionResult<object> GetNumberOfRentForEachVehicle()
+    public ActionResult<List<RentalCounterDto>> GetNumberOfRentForEachVehicle()
     {
         var vehicles = requestService.NumberOfRentForEachVehicle();
         return Ok(vehicles);

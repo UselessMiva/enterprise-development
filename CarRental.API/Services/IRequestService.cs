@@ -1,4 +1,5 @@
-﻿using CarRental.Domain;
+﻿using CarRental.API.DTO;
+using CarRental.Domain;
 namespace CarRental.API.Services;
 
 /// <summary>
@@ -29,7 +30,7 @@ public interface IRequestService
     /// <summary>
     /// Информация о количестве аренд для каждого автомобиля
     /// </summary>
-     public object NumberOfRentForEachVehicle();
+     public List<RentalCounterDto> NumberOfRentForEachVehicle();
 
     /// <summary>
     /// Информация о пунктах проката по количеству аренд
