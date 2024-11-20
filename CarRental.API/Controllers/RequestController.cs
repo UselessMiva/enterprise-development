@@ -12,6 +12,7 @@ namespace CarRental.API.Controllers;
 [ApiController]
 public class RequestController(IRequestService requestService) : ControllerBase
 {
+
     /// <summary>
     /// Возвращает список всех автомобилей
     /// </summary>
@@ -61,7 +62,7 @@ public class RequestController(IRequestService requestService) : ControllerBase
     /// </summary>
     /// <returns>Список  количества аренд для каждой модели автомобиля</returns>
     [HttpGet("numberOfCarRentals")]
-    public ActionResult<RentalCounterDTO> GetNumberOfRentForEachVehicle()
+    public ActionResult<List<RentalCounterDTO>> GetNumberOfRentForEachVehicle()
     {
         var vehicles = requestService.NumberOfRentForEachVehicle();
         return Ok(vehicles);
