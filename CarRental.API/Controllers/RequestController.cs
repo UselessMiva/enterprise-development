@@ -65,7 +65,10 @@ public class RequestController(IRequestService requestService) : ControllerBase
     public ActionResult<List<RentalCounterDTO>> GetNumberOfRentForEachVehicle()
     {
         var vehicles = requestService.NumberOfRentForEachVehicle();
-        return Ok(vehicles);
+        var result = new List<RentalCounterDTO>();
+        foreach (var vehicle in vehicles)
+            result.Add(new RentalCounterDTO(vehicle.Item1, vehicle.Item2));
+        return Ok(result);
     }
 
     /// <summary>
