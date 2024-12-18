@@ -8,7 +8,7 @@ namespace CarRental.API.Services;
 /// Сервис для управления данными о пунктах проката
 /// Реализует интерфейс IService для выполнения операций CRUD с пунктами проката
 /// </summary>
-public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, IMapper mapper) : IService<RentalPointDTO, RentalPoint>
+public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, IMapper mapper) : IService<RentalPointGetDTO, RentalPointPostDTO>
 {
     private int _id = 1;
 
@@ -16,9 +16,9 @@ public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, 
     /// Получает список всех пунктов проката
     /// </summary>
     /// <returns>Список всех пунктов проката</returns>
-    public IEnumerable<RentalPoint> GetAll()
+    public IEnumerable<RentalPointGetDTO> GetAll()
     {
-        return rentalPointRepository.GetAll();
+        return rentalPointRepository.GetAll().Select(mapper.Map<RentalPointGetDTO>);
     }
 
     /// <summary>
@@ -26,10 +26,10 @@ public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, 
     /// </summary>
     /// <param name="id">Идентификатор пункта проката</param>
     /// <returns>Пункта проката с указанным идентификатором или null, если не найден.</returns>
-    public RentalPoint Get(int id)
+    public RentalPointGetDTO Get(int id)
     {
         var rentalPoint = rentalPointRepository.Get(id);
-        return rentalPoint;
+        return mapper.Map<RentalPointGetDTO>(rentalPoint);
     }
 
     /// <summary>
@@ -37,11 +37,11 @@ public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, 
     /// </summary>
     /// <param name="entity">DTO объекта пункт проката для добавления</param>
     /// <returns>Добавленный пункт проката или null, если не добавлен</returns>
-    public RentalPoint? Post(RentalPointDTO entity)
+    public RentalPointGetDTO? Post(RentalPointPostDTO entity)
     {
         var rentalPoint = mapper.Map<RentalPoint>(entity);
         rentalPoint.Id = _id++;
-        return rentalPointRepository.Post(rentalPoint);
+        return mapper.Map<RentalPointGetDTO>(rentalPointRepository.Post(rentalPoint));
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class RentalPointService(IRepository<RentalPoint> rentalPointRepository, 
     /// <param name="id">Идентификатор пункта проката для обновления</param>
     /// <param name="entity">DTO объекта пункт проката с новыми данными</param>
     /// <returns>True, если обновлен, иначе - False</returns>
-    public bool Put(int id, RentalPointDTO entity)
+    public bool Put(int id, RentalPointPostDTO entity)
     {
         var rentalPoint = mapper.Map<RentalPoint>(entity);
         return rentalPointRepository.Put(rentalPoint, id);

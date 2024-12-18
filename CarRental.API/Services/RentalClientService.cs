@@ -8,7 +8,7 @@ namespace CarRental.API.Services;
 /// Сервис для управления данными о клиентах
 /// Реализует интерфейс IService для выполнения операций CRUD с клиентами
 /// </summary>
-public class RentalClientService(IRepository<RentalClient> rentalClientRepository, IMapper mapper) : IService<RentalClientDTO, RentalClient>
+public class RentalClientService(IRepository<RentalClient> rentalClientRepository, IMapper mapper) : IService<RentalClientGetDTO, RentalClientPostDTO>
 {
     private int _id = 1;
 
@@ -16,9 +16,9 @@ public class RentalClientService(IRepository<RentalClient> rentalClientRepositor
     /// Получает список всех клиентов
     /// </summary>
     /// <returns>Список всех клиентов</returns>
-    public IEnumerable<RentalClient> GetAll()
+    public IEnumerable<RentalClientGetDTO> GetAll()
     {
-        return rentalClientRepository.GetAll();
+        return rentalClientRepository.GetAll().Select(mapper.Map<RentalClientGetDTO>);
     }
 
     /// <summary>
@@ -26,10 +26,10 @@ public class RentalClientService(IRepository<RentalClient> rentalClientRepositor
     /// </summary>
     /// <param name="id">Идентификатор клиента</param>
     /// <returns>Клиента с указанным идентификатором или null, если не найден.</returns>
-    public RentalClient Get(int id)
+    public RentalClientGetDTO Get(int id)
     {
         var rentalClient = rentalClientRepository.Get(id);
-        return rentalClient;
+        return mapper.Map<RentalClientGetDTO>(rentalClient);
     }
 
     /// <summary>
@@ -37,11 +37,11 @@ public class RentalClientService(IRepository<RentalClient> rentalClientRepositor
     /// </summary>
     /// <param name="entity">DTO объекта клиент для добавления</param>
     /// <returns>Добавленный клиент или null, если не добавлен</returns>
-    public RentalClient? Post(RentalClientDTO entity)
+    public RentalClientGetDTO? Post(RentalClientPostDTO entity)
     {
         var rentalClient = mapper.Map<RentalClient>(entity);
         rentalClient.Id = _id++;
-        return rentalClientRepository.Post(rentalClient);
+        return mapper.Map<RentalClientGetDTO>(rentalClientRepository.Post(rentalClient));
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class RentalClientService(IRepository<RentalClient> rentalClientRepositor
     /// <param name="id">Идентификатор клиента для обновления</param>
     /// <param name="entity">DTO объекта клиент с новыми данными</param>
     /// <returns>True, если обновлен, иначе - False</returns>
-    public bool Put(int id, RentalClientDTO entity)
+    public bool Put(int id, RentalClientPostDTO entity)
     {
         var rentalClient = mapper.Map<RentalClient>(entity);
         return rentalClientRepository.Put(rentalClient, id);

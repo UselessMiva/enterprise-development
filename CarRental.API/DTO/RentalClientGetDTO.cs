@@ -3,7 +3,7 @@
 /// <summary>
 /// Клиент проката автомобилей
 /// </summary>
-public class RentalClientDTO
+public class RentalClientGetDTO
 {
     /// <summary>
     /// Идентификатор клиента

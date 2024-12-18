@@ -8,7 +8,7 @@ namespace CarRental.API.Services;
 /// Сервис для управления данными об автомобилях
 /// Реализует интерфейс IService для выполнения операций CRUD с автомобилями
 /// </summary>
-public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper mapper) : IService<VehicleDTO, Vehicle>
+public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper mapper) : IService<VehicleGetDTO, VehiclePostDTO>
 {
     private int _id = 1;
 
@@ -16,9 +16,9 @@ public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper map
     /// Получает список всех автомобилей
     /// </summary>
     /// <returns>Список всех автомобилей</returns>
-    public IEnumerable<Vehicle> GetAll()
+    public IEnumerable<VehicleGetDTO> GetAll()
     {
-        return vehicleRepository.GetAll();
+        return vehicleRepository.GetAll().Select(mapper.Map<VehicleGetDTO>);
     }
 
     /// <summary>
@@ -26,10 +26,10 @@ public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper map
     /// </summary>
     /// <param name="id">Идентификатор автомобиля</param>
     /// <returns>Автомобиль с указанным идентификатором или null, если не найден.</returns>
-    public Vehicle? Get(int id)
+    public VehicleGetDTO? Get(int id)
     {
         var vehicle = vehicleRepository.Get(id);
-        return vehicle;
+        return mapper.Map<VehicleGetDTO>(vehicle);
     }
 
     /// <summary>
@@ -37,11 +37,11 @@ public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper map
     /// </summary>
     /// <param name="entity">DTO объекта автомобиль для добавления</param>
     /// <returns>Добавленный автомобиль или null, если не добавлен</returns>
-    public Vehicle? Post(VehicleDTO entity)
+    public VehicleGetDTO? Post(VehiclePostDTO entity)
     {
         var vehicle = mapper.Map<Vehicle>(entity);
         vehicle.Id = _id++;
-        return vehicleRepository.Post(vehicle);
+        return mapper.Map<VehicleGetDTO>(vehicleRepository.Post(vehicle));
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class VehicleService( IRepository<Vehicle> vehicleRepository, IMapper map
     /// <param name="id">Идентификатор автомобиля для обновления</param>
     /// <param name="entity">DTO объекта автомобиль с новыми данными</param>
     /// <returns>True, если обновлен, иначе - False</returns>
-    public bool Put(int id, VehicleDTO entity)
+    public bool Put(int id, VehiclePostDTO entity)
     {
         var vehicle = mapper.Map<Vehicle>(entity);
         return vehicleRepository.Put(vehicle, id);

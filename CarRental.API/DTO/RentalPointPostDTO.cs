@@ -1,15 +1,7 @@
 ﻿namespace CarRental.API.DTO;
 
-/// <summary>
-/// Реализация пункта проката
-/// </summary>
-public class RentalPointDTO
+public class RentalPointPostDTO
 {
-    /// <summary>
-    /// Идентификатор пункта проката
-    /// </summary>
-    public int? Id { get; set; }
-
     /// <summary>
     /// Название пункта проката
     /// </summary>

@@ -8,9 +8,15 @@ public class Mapping: Profile
 {
     public Mapping()
     {
-        CreateMap<Vehicle,VehicleDTO>().ReverseMap();
-        CreateMap<RentalClient, RentalClientDTO>().ReverseMap();
-        CreateMap<RentalPoint, RentalPointDTO>().ReverseMap();
-        CreateMap<CarOnRent, CarOnRentDTO>().ReverseMap();
+        CreateMap<CarOnRent, CarOnRentGetDTO>().ReverseMap();
+        CreateMap<CarOnRent, CarOnRentPostDTO>().ReverseMap();
+        CreateMap<Vehicle,VehicleGetDTO>().ReverseMap();
+        CreateMap<Vehicle, VehiclePostDTO>();
+        CreateMap<RentalClient, RentalClientGetDTO>().ReverseMap();
+        CreateMap<RentalClient, RentalClientPostDTO>().ReverseMap();
+        CreateMap<RentalPoint, RentalPointGetDTO>().ReverseMap();
+        CreateMap<RentalPoint, RentalPointPostDTO>().ReverseMap();
+        CreateMap<RentalPoint, RentalPointGetDTO>().ReverseMap();
+        CreateMap<RentalPoint, RentalPointPostDTO>().ReverseMap();
     }
 }

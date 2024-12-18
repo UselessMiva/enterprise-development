@@ -10,7 +10,7 @@ namespace CarRental.Api.Controllers;
 /// <param name="rentalClientService">Сервис для работы с клиентами</param>
 [ApiController]
 [Route("api/[controller]")]
-public class RentalClientsController(IService<RentalClientDTO, RentalClient> rentalClientService) : ControllerBase
+public class RentalClientsController(IService<RentalClientGetDTO, RentalClientPostDTO> rentalClientService) : ControllerBase
 {
 
     /// <summary>
@@ -18,7 +18,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// </summary>
     /// <returns>Список клиентов проката</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<RentalClientDTO>> GetAll()
+    public ActionResult<IEnumerable<RentalClientGetDTO>> GetAll()
     {
         return Ok(rentalClientService.GetAll());
     }
@@ -29,7 +29,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// <param name="id">Идентификатор клиента</param>
     /// <returns>Клиент проката</returns>
     [HttpGet("{id}")]
-    public ActionResult<RentalClientDTO> Get(int id)
+    public ActionResult<RentalClientGetDTO> Get(int id)
     {
         var result = rentalClientService.Get(id);
         if (result == null)
@@ -44,7 +44,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// <param name="rentalClient">Данные клиента проката</param>
     /// <returns>Созданный клиент проката</returns>
     [HttpPost]
-    public ActionResult<RentalClientDTO> Post([FromBody] RentalClientDTO rentalClient)
+    public ActionResult<RentalClientGetDTO> Post([FromBody] RentalClientPostDTO rentalClient)
     {
         var result = rentalClientService.Post(rentalClient);
         if (result == null)
@@ -60,7 +60,7 @@ public class RentalClientsController(IService<RentalClientDTO, RentalClient> ren
     /// <param name="rentalClient">Обновленные данные клиента проката</param>
     /// <returns>Статус ответа</returns>
     [HttpPut("{id}")]
-    public IActionResult Put(int id,[FromBody] RentalClientDTO rentalClient)
+    public IActionResult Put(int id,[FromBody] RentalClientPostDTO rentalClient)
     {
         var result = rentalClientService.Put(id, rentalClient);
         if (!result)

@@ -4,7 +4,7 @@ namespace CarRental.API.DTO;
 /// <summary>
 /// Аренда автомобиля
 /// </summary>
-public class CarOnRentDTO
+public class CarOnRentGetDTO
     {
         /// <summary>
         /// Идентификатор аренды

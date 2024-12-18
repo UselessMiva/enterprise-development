@@ -12,7 +12,7 @@ namespace CarRental.Api.Controllers;
 /// <param name="vehicleService">Сервис для работы с автомобилями</param>
 [ApiController]
 [Route("api/[controller]")]
-public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : ControllerBase
+public class VehiclesController(IService<VehicleGetDTO,VehiclePostDTO> vehicleService) : ControllerBase
 {
 
     /// <summary>
@@ -20,7 +20,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// </summary>
     /// <returns>Список автомобилей</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<VehicleDTO>> GetAll()
+    public ActionResult<IEnumerable<VehicleGetDTO>> GetAll()
     {
         return Ok(vehicleService.GetAll());
     }
@@ -31,7 +31,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// <param name="id">Идентификатор автомобиля</param>
     /// <returns>Автомобиль</returns>
     [HttpGet("{id}")]
-    public ActionResult<VehicleDTO> Get(int id)
+    public ActionResult<VehicleGetDTO> Get(int id)
     {
         var result = vehicleService.Get(id);
         if (result == null)
@@ -46,7 +46,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// <param name="vehicle">Данные автомобиля</param>
     /// <returns>Созданный автомобиль</returns>
     [HttpPost]
-    public ActionResult<VehicleDTO> Post([FromBody] VehicleDTO vehicle)
+    public ActionResult<VehicleGetDTO> Post([FromBody] VehiclePostDTO vehicle)
     {
         var result = vehicleService.Post(vehicle);
         if (result == null)
@@ -62,7 +62,7 @@ public class VehiclesController(IService<VehicleDTO,Vehicle> vehicleService) : C
     /// <param name="vehicle">Обновленные данные автомобиля</param>
     /// <returns>Статус ответа</returns>
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] VehicleDTO vehicle)
+    public IActionResult Put(int id, [FromBody] VehiclePostDTO vehicle)
     {
         var result = vehicleService.Put(id, vehicle);
         if (!result)

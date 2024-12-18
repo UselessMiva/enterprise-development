@@ -1,15 +1,7 @@
 ﻿namespace CarRental.API.DTO;
 
-/// <summary>
-/// Реализация автомобиля
-/// </summary>
-public class VehicleDTO
+public class VehiclePostDTO
 {
-    /// <summary>
-    /// Идентификатор автомобиля
-    /// </summary>
-    public int? Id { get; set; }
-
     /// <summary>
     /// Номер автомобиля
     /// </summary>

@@ -8,7 +8,7 @@ namespace CarRental.API.Services;
 /// Сервис для управления данными об автомобилях, выданных в аренду
 /// Реализует интерфейс IService для выполнения операций CRUD с автомобилями, выданными в аренду
 /// </summary>
-public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMapper mapper) : IService<CarOnRentDTO, CarOnRent>
+public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMapper mapper) : IService<CarOnRentGetDTO, CarOnRentPostDTO>
 {
     private int _id = 1;
 
@@ -16,9 +16,9 @@ public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMappe
     /// Получает список всех автомобилей, выданных в аренду
     /// </summary>
     /// <returns>Список всех автомобилей, выданных в аренду</returns>
-    public IEnumerable<CarOnRent> GetAll()
+    public IEnumerable<CarOnRentGetDTO> GetAll()
     {
-        return carOnRentRepository.GetAll();
+        return carOnRentRepository.GetAll().Select(mapper.Map<CarOnRentGetDTO>);
     }
 
     /// <summary>
@@ -26,10 +26,10 @@ public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMappe
     /// </summary>
     /// <param name="id">Идентификатор автомобиля, выданного в аренду</param>
     /// <returns>Автомобиль, выданный в аренду, с указанным идентификатором или null, если не найден.</returns>
-    public CarOnRent Get(int id)
+    public CarOnRentGetDTO Get(int id)
     {
         var carOnRent = carOnRentRepository.Get(id);
-        return carOnRent;
+        return mapper.Map<CarOnRentGetDTO>(carOnRent);
     }
 
     /// <summary>
@@ -37,11 +37,11 @@ public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMappe
     /// </summary>
     /// <param name="entity">DTO объекта автомобиль, выданный в аренду, для добавления</param>
     /// <returns>Добавленный автомобиль или null, если не добавлен</returns>
-    public CarOnRent? Post(CarOnRentDTO entity)
+    public CarOnRentGetDTO? Post(CarOnRentPostDTO entity)
     {
         var carOnRent = mapper.Map<CarOnRent>(entity);
         carOnRent.Id = _id++;
-        return carOnRentRepository.Post(carOnRent);
+        return mapper.Map<CarOnRentGetDTO>(carOnRentRepository.Post(carOnRent));
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class CarOnRentService(IRepository<CarOnRent> carOnRentRepository, IMappe
     /// <param name="id">Идентификатор автомобиля,выданного в аренду, для обновления</param>
     /// <param name="entity">DTO объекта автомобиль, выданный в аренду, с новыми данными</param>
     /// <returns>True, если обновлен, иначе - False</returns>
-    public bool Put(int id, CarOnRentDTO entity)
+    public bool Put(int id, CarOnRentPostDTO entity)
     {
         var carOnRent = mapper.Map<CarOnRent>(entity);
         return carOnRentRepository.Put(carOnRent, id);

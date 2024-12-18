@@ -23,10 +23,10 @@ builder.Services.AddSingleton<IRepository<RentalClient>, RentalClientRepository>
 builder.Services.AddSingleton<IRepository<RentalPoint>, RentalPointRepository>();
 builder.Services.AddSingleton<IRepository<Vehicle>, VehicleRepository>();
 
-builder.Services.AddSingleton<IService<CarOnRentDTO, CarOnRent>, CarOnRentService>();
-builder.Services.AddSingleton<IService<RentalClientDTO, RentalClient>, RentalClientService>();
-builder.Services.AddSingleton<IService<RentalPointDTO, RentalPoint>, RentalPointService>();
-builder.Services.AddSingleton<IService<VehicleDTO, Vehicle>, VehicleService>();
+builder.Services.AddSingleton<IService<CarOnRentGetDTO, CarOnRentPostDTO>, CarOnRentService>();
+builder.Services.AddSingleton<IService<RentalClientGetDTO, RentalClientPostDTO>, RentalClientService>();
+builder.Services.AddSingleton<IService<RentalPointGetDTO, RentalPointPostDTO>, RentalPointService>();
+builder.Services.AddSingleton<IService<VehicleGetDTO, VehiclePostDTO>, VehicleService>();
 builder.Services.AddSingleton<IRequestService, RequestService>();
 builder.Services.AddSingleton<TestDataProvider>();
 
