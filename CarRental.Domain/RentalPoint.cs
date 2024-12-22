@@ -1,25 +1,41 @@
-﻿namespace CarRental.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace CarRental.Domain;
 
 /// <summary>
 /// Реализация пункта проката
 /// </summary>
-/// <param name="id">Идентификатор пункта</param>
-/// <param name="name">Название пункта</param>
-/// <param name="address">Адрес пункта</param>
-public class RentalPoint(int id, string name, string address)
+[Table("rental_point")]
+public class RentalPoint
 {
     /// <summary>
     /// Идентификатор пункта проката
     /// </summary>
-    public int? Id { get; set; } = id;
+    [Key]
+    [Column("id")]
+    public int? Id { get; set; }
 
     /// <summary>
     /// Название пункта проката
     /// </summary>
-    public string? Name { get; set; } = name;
+    [Column("name")]
+    public string? Name { get; set; }
 
     /// <summary>
     /// Адрес пункта проката
     /// </summary>
-    public string? Address { get; set; } = address;
+    [Column("address")]
+    public string? Address { get; set; }
+
+    // Параметрless конструктор
+    public RentalPoint() { }
+
+    // Конструктор с параметрами
+    public RentalPoint(int id, string name, string address)
+    {
+        Id = id;
+        Name = name;
+        Address = address;
+    }
 }

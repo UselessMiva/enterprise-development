@@ -1,31 +1,48 @@
-﻿namespace CarRental.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace CarRental.Domain;
 
 /// <summary>
 /// Реализация автомобиля
 /// </summary>
-/// <param name="id">Идентификатор автомобиля</param>
-/// <param name="carNumber">Номер автомобиля</param>
-/// <param name="model">Модель автомобиля</param>
-/// <param name="color">Цвет автомобиля</param>
-public class Vehicle(int id, string carNumber, string model, string color)
+[Table("vehicle")]
+public class Vehicle
 {
     /// <summary>
     /// Идентификатор автомобиля
     /// </summary>
-    public int? Id { get; set; } = id;
+    [Key]
+    [Column("id")]
+    public int? Id { get; set; }
 
     /// <summary>
     /// Номер автомобиля
     /// </summary>
-    public string? CarNumber { get; set; } = carNumber;
+    [Column("car_number")]
+    public string? CarNumber { get; set; }
 
     /// <summary>
     /// Модель автомобиля
     /// </summary>
-    public string? Model { get; set; } = model;
+    [Column("model")]
+    public string? Model { get; set; }
 
     /// <summary>
     /// Цвет автомобиля
     /// </summary>
-    public string? Color { get; set; } = color;
+    [Column("color")]
+    public string? Color { get; set; }
+
+    // Параметрless конструктор
+    public Vehicle() { }
+
+    // Конструктор с параметрами
+    public Vehicle(int id, string carNumber, string model, string color)
+    {
+        Id = id;
+        CarNumber = carNumber;
+        Model = model;
+        Color = color;
+    }
 }
